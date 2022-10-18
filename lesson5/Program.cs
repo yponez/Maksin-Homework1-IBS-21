@@ -10,25 +10,40 @@ namespace lesson
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("enter a");
+            Console.WriteLine("enter the first side");
             string a = Console.ReadLine();
-            Console.WriteLine("enter b");
-            string b = Console.ReadLine();
-            Console.WriteLine("enter c");
-            string c = Console.ReadLine();
-            double Da;
-            double Db;
-            double Dc;
+            Double Da;
             bool Resulta = double.TryParse(a, out Da);
-            bool Resultb = double.TryParse(b, out Db);
-            bool Resultc = double.TryParse(c, out Dc);
-            double P = (Da + Db + Dc) / 2;
-            if (Da <= 0 || !Resulta || Db <= 0 || !Resultb || Dc <= 0 || !Resultc)
+            if (!Resulta || Da <= 0)
             {
-                Console.WriteLine("ERROR");
+                Console.WriteLine("first side is false");
+                return;
             }
-            else
+            Console.WriteLine("enter the second side");
+            string b = Console.ReadLine();
+            double Db;
+            bool Resultb = double.TryParse(b, out Db);
+            if (!Resultb || Db <= 0)
             {
+                Console.WriteLine("second side is false");
+                return;
+            }
+            Console.WriteLine("enter the third side");
+            string c = Console.ReadLine();
+            double Dc;
+            bool Resultc = double.TryParse(c, out Dc);
+            if (!Resultc || Dc <= 0)
+            {
+                Console.WriteLine("third side is false");
+                return;
+            }
+            if ((Da + Db) > Dc || (Db + Dc) > Da || (Dc + Da) > Db)
+            {
+                Console.WriteLine("the tringle does not exist");
+                return;
+            }
+            {
+                double P = (Da + Db + Dc) / 2;
                 Console.WriteLine("S = " + Math.Sqrt(P * (P - Da) * (P - Db) * (P - Dc)));
             }
         }
